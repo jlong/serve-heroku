@@ -24,8 +24,8 @@ unless ENV['RACK_ENV'] == "production"
 end
 
 # Rack Application
-if ENV['SERVER_SOFTWARE'] =~ /passenger/i
-  # Passendger only needs the adapter
+if ENV['RACK_ENV'] == "production"
+  # Production environments should serve files from public by default 
   run Serve::RackAdapter.new(root + '/views')
 else
   # We use Rack::Cascade and Rack::Directory on other platforms to handle static 
