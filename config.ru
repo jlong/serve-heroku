@@ -6,9 +6,6 @@ gem 'serve'
 require 'serve'
 require 'serve/rack'
 
-require 'sass/plugin/rack'
-require 'compass'
-
 # The project root directory
 root = ::File.dirname(__FILE__)
 
@@ -22,6 +19,8 @@ if ENV['RACK_ENV'] == "production"
   run Serve::RackAdapter.new(root + '/views')
 else
   # Compile Sass on the fly
+  require 'sass/plugin/rack'
+  require 'compass'
   Compass.add_project_configuration(root + '/compass.config')
   Compass.configure_sass_plugin!
   use Sass::Plugin::Rack
