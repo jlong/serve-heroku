@@ -16,21 +16,20 @@ root = ::File.dirname(__FILE__)
 Compass.add_project_configuration(root + '/compass.config')
 Compass.configure_sass_plugin!
 
-# Rack Middleware
+# Common Rack Middleware
 use Rack::ShowStatus      # Nice looking 404s and other messages
 use Rack::ShowExceptions  # Nice looking errors
-unless ENV['RACK_ENV'] == "production"
-  use Sass::Plugin::Rack    # Compile Sass on the fly
-end
 
-# Rack Application
 if ENV['RACK_ENV'] == "production"
-  # Production environments should serve files from public already, so all
-  # we need to do is mount Serve to handle our views
+  # Use Rack::Static with Heroku
+  use Rack::Static, :urls => ["/images", "/javascripts", "/stylesheets"], :root => "public"
   run Serve::RackAdapter.new(root + '/views')
 else
-  # We use Rack::Cascade and Rack::Directory in development mode to handle
-  # files in the public directory
+  # Compile Sass on the fly
+  use Sass::Plugin::Rack
+  
+  # Use Rack::Cascade and Rack::Directory in development mode to handle
+  # files in the public directory gracefully
   run Rack::Cascade.new([
     Serve::RackAdapter.new(root + '/views'),
     Rack::Directory.new(root + '/public')
