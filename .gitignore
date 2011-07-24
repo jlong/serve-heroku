@@ -7,13 +7,14 @@ tmtags
 
 ## EMACS
 *~
-#*
-.#*
+\#*
+.\#*
 
 ## VIM
 *.swp
 
 ## PROJECT::GENERAL
+.sass-cache
 coverage
 rdoc
 pkg
@@ -22,4 +23,3 @@ pkg
 *.gem
 .rvmrc
 .bundle
-.sass-cache
