@@ -8,7 +8,7 @@ gem 'serve', '1.5.1'
 # Use Compass and Sass
 gem 'compass'
 
-gem 'rygments'
+gem 'pygments.rb'
 gem 'rack-codehighlighter', :git => 'git://github.com/jlong/rack-codehighlighter.git'
 
 # Markdown and Textile

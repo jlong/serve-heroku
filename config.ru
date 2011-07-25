@@ -31,7 +31,7 @@ if ENV['RACK_ENV'] != 'production'
 end
 
 # Syntax highlighting with Codehiglighter
-require 'rygments'
+require 'pygments'
 require 'rack/codehighlighter'
 use Rack::Codehighlighter, :pygments, :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
 
