@@ -31,8 +31,9 @@ if ENV['RACK_ENV'] != 'production'
 end
 
 # Syntax highlighting with Codehiglighter
+require 'rygments'
 require 'rack/codehighlighter'
-use Rack::Codehighlighter, :pygments_api, :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+use Rack::Codehighlighter, :pygments, :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
 
 # Other Rack Middleware
 use Rack::ShowStatus      # Nice looking 404s and other messages
